@@ -1,0 +1,217 @@
+html,body,h1,h2,p,dl,dt,dd,ol,ul,li,fieldset,form,fieldset,label,table,
+tbody,tfoot,thead,tr,th,td
+ {margin                                     : 0;
+  padding                                    : 0;
+  border                                     : 0;
+  outline                                    : 0;
+  font-weight                                : inherit;
+  font-style                                 : inherit;
+  font-size                                  : 100%;
+  font-family                                : inherit;
+  vertical-align                             : baseline;}
+
+table
+ {border-collapse                            : separate;
+  border-spacing                             : 0;}
+td
+ {text-align                                 : left;
+  font-weight                                : normal;
+  vertical-align                             : middle;}
+
+html
+ {background-color                           : #ddd;
+  font                                       : 10px/22px normal Helvetica,Arial,sans-serif;
+  padding                                    : 10px;
+  color                                      : #565656;
+  text-shadow                                : #fff 0 1px 0;}
+body
+ {font-size                                  : 1.3em;
+  margin                                     : 0 auto;
+  width                                      : 650px;}
+
+h1
+ {font-size                                  : 1.8em;
+  margin-top                                 : 20px;
+  color                                      : #565656;}
+h1:first-child
+ {margin-top                                 : 0;}
+h1+p
+ {margin-top                                 : 10px;}
+
+dd,p
+ {margin-bottom                              : 10px;}
+dt
+ {font-size                                  : 1.1em;}
+dd:last-child
+ {margin-bottom                              : 0;}
+
+form
+ {color                                      : #000;}
+fieldset
+ {margin-top                                 : 10px;
+  text-shadow                                : transparent 0 0 0;}
+fieldset>table
+ {width                                      : 100%;
+  border                                     : 1px solid #ababab;
+  border-radius                              : 8px;
+  background-color                           : #fff;}
+fieldset>table>tbody>tr>td
+ {width                                      : 40%;
+  border-top                                 : 1px solid #ababab;
+  padding                                    : 10px;}
+fieldset>table>tbody>tr>td:first-child
+ {font-weight                                : bold;}
+fieldset>table>tbody>tr:first-child>td
+ {border-top                                 : 1px;}
+fieldset>table>tbody>tr>td:first-child+td
+ {width                                      : 60%;}
+
+td td
+ {padding-right                              : 10px;}
+td td:last-child
+ {padding-right                              : 0;
+  width                                      : 49px;}
+td td:last-child>button+button
+ {margin-left                                : 5px;}
+
+form fieldset>table>tbody>tr>td:last-child
+ {display 									 : none;
+  position                                   : relative;}
+form fieldset>table>tbody>tr>td:last-child.help
+ {display                                    : table-cell;}
+fieldset>table>tbody>tr>td:last-child>button,
+td td:last-child>button
+ {width                                      : 22px;
+  padding                                    : 0;
+  margin                                     : 0;
+  border-radius                              : 11px;
+  font-size                                  : 1.2em;
+  height                                     : 22px;
+  box-shadow                                 : 0 1px 0 #ababab inset;
+  background-color                           : #d5d5d5;
+  color                                      : white;
+  font-weight                                : bold;}
+fieldset>table>tbody>tr>td:last-child>button:hover,
+td td:last-child>button:hover
+ {background-color                           : #ababab;
+  border-color                               : #808080;
+  box-shadow                                 : 0 1px 0 #808080 inset;}
+fieldset>table>tbody>tr>td:last-child>button:active
+ {background-color                           : #5d9df5;
+  box-shadow                                 : 0 0 0 transparent;
+  border-color                               : #2e4e7a;
+  padding                                    : 0 !important;}
+button span
+ {display                                    : none;}
+button.minus,button.plus
+ {background-position                        : center center;
+  background-repeat                          : no-repeat;}
+button.plus
+ {background-image                           : url('../plus.png');}
+button.minus
+ {background-image                           : url('../minus.png');}
+
+.help>div
+ {-o-transition 							 : opacity 0.25s, top 0.25s, visibility 0.25s;
+  visibility 								 : hidden;
+  opacity                                    : 0;
+  position                                   : absolute;
+  z-index                                    : 2112;
+  top                                        : 20px;
+  right                                      : 3px;
+  background-color                           : rgba(0,0,0,0.7);
+  border-radius                              : 8px;
+  padding                                    : 10px 12px 10px 20px;
+  color                                      : #fff;
+  text-shadow                                : 0 1px 0 #000;
+  box-shadow                                 : 0 2px 5px rgba(0,0,0,0.5);
+  width                                      : 350px;
+  font-weight                                : bold;
+  direction                                  : rtl;}
+.help > div.visible
+ {-o-transition			 					 : opacity 0.25s, top 0.25s;
+  top 										 : 43px;
+  opacity 									 : 1;
+  visibility								 : visible;} 	
+.help>div div
+ {display                                    : table-cell;
+  direction                                  : ltr;
+  text-align                                 : left;
+  vertical-align                             : top;}
+.help>div div:first-child
+ {width                                      : 12px;
+  position                                   : relative;}
+.help>div div:last-child
+ {width                                      : 100%;
+  padding-right                              : 22px;}
+.help label,.help div button
+ {background-image                           : url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAxCAMAAADZT7imAAAAP1BMVEX///8AAACRkZHX19cAAACRkZHX19eRkZHX19cAAADX19cAAACRkZHX19cAAACRkZHX19eRkZHX19eRkZHX19dPNKExAAAAE3RSTlMACyAgLTAwYGBlkJygoLLAwPDw/39K+gAAALNJREFUKM+djkkOxDAIBMlqO068AP9/68BkU99G06cClRqIaNy7SN9HsiyGnr7Yvkt1rtJH2qVSEAlUZafuEIIvOrkSyFkEB9CgAKrhKL6DmQ5W5WNyXg09vNqetTk35YkObRRVIzU9iB1i9AWTK5GcVXEADQqgGo7iO/9ls551u9harf+cDJivM+fZm2EADQqg+vek9PJcynzzkEvJwy0VS3okz3xLnq+YypX0SKeY3yF/ADIcFE3LtNhAAAAAAElFTkSuQmCC');
+  background-repeat                          : no-repeat;}
+.help label
+ {position                                   : absolute;
+  display                                    : block;
+  height                                     : 15px;
+  background-position                        : 0 -39px;
+  padding-top                                : 24px;
+  top                                        : -20px;
+  right                                      : 0;}
+.help div button
+ {margin                                     : 0;
+  padding                                    : 0;
+  border                                     : 0;
+  border-radius                              : 0;
+  box-shadow                                 : 0 0 0 transparent;
+  text-indent                                : -9999px;
+  width                                      : 12px;
+  height                                     : 12px;
+  background-color                           : transparent;
+  background-position                        : top left;}
+.help div button:hover
+ {background-position                        : 0 -13px;}
+.help div button:active
+ {background-position                        : 0 -26px;}
+.help a,.help a:visited,.help a:hover,.help a:active
+ {color                                      : #5d9df5;}
+
+select,option,input,button
+ {line-height                                : 22px;
+  height                                     : 22px;
+  width                                      : 100%;
+  font-size                                  : 1em;
+  box-sizing                                 : border-box;}
+td>label
+ {display 									 : table;
+  width										 : 100%;}
+td>label>span
+ {display                                    : table-cell;}
+td>label>span:last-child
+ {width										 : 1px;
+  padding									 : 0 0 0 10px;}
+.buttons
+ {text-align                                 : right;}
+button
+ {width                                      : auto;
+  background-color                           : white;
+  border                                     : 1px solid #ababab;
+  border-radius                              : 4px;
+  margin                                     : 0;
+  padding                                    : 0 10px;
+  margin-left                                : 10px;
+  height                                     : 32px;
+  cursor                                     : pointer;}
+.buttons button:active
+ {background-color                           : #ddd;
+  line-height                                : inherit;
+  border-color                               : #808080;
+  box-shadow                                 : 0 0 5px rgba(0,0,0,0.5) inset;}
+.buttons button[type="submit"]
+ {border-color                               : #808080;
+  border-width                               : 2px;
+  font-weight                                : bold;}
+
+@media screen and (max-width:670px)
+{
+ body
+  {width                                     : 100%;}
+}
+

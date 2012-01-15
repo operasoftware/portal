@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Opera Portal - Preferences</title>
+    <script src=js/options.js></script>
+    <link rel=stylesheet type=text/css href=style/options.css />
+</head>
+<body>
+<form name="Opera Portal prefrences">
+
+ <fieldset>
+  <table>
+   <tr>
+    <td>Seconds Per Post</td>
+    <td><label><span><input type="number" name="secondsperpost" step="1" min="1"></span> <span>seconds</span></label></td>
+    <td><div>Specifies the amount of time each post displays before transitioning to the next one.</div></td>
+   </tr>
+   <tr>
+    <td>Sources</td>
+    <td>
+     <table><tbody id="sources"></tbody></table>
+    </td>
+    <td><div>
+     <p>The first option allows for selecting which source to use, and the second option allows for selecting the maximum amount of posts from each source.</p>
+     <p>
+    </div></td>
+   </tr>
+  </table>
+ </fieldset>
+
+ <fieldset class="buttons">
+  <button type="submit">Save</button>
+ </fieldset>
+</form>

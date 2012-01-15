@@ -1,0 +1,15 @@
+<widget xmlns="http://www.w3.org/ns/widgets" id="extensions:opera-portal" viewmodes="minimized" version="1.0">
+	<name>News Portal</name>
+	<description>Your Opera News Portal -- on Speed (Dial)!</description>
+	<author href="http://dustinwilson.com">Dustin Wilson</author>
+	<icon src="opera_icon_clean.png"/>
+	<access origin="http://portal.opera.com"/>
+	<access origin="*"/>
+	<feature name="opera:speeddial" required="true">
+	 <param name="url" value="http://portal.opera.com"/>
+	</feature>
+	<license></license>
+	<preference name="sources" value=''/>
+	<preference name="delay" value="15"/> 
+	<preference name="baseURI" value="http://portal.opera.com/api/"/>
+</widget>

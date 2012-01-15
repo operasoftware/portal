@@ -1,0 +1,146 @@
+html,body,h1,h2,p,header,figure,article,img
+ {margin                                     : 0;
+  padding                                    : 0;
+  border                                     : 0;
+  font-size                                  : 100%;
+  font                                       : inherit;
+  vertical-align                             : baseline;}
+article,figure,header
+ {display                                    : block;}
+
+html,body
+ {max-width                                  : 100%;
+  overflow                                   : hidden;}
+html
+ {background-color                           : #fff;
+  /* background-image                           : -o-linear-gradient(top,#ededed 0%,#fbfbfb 100%);
+  background-image                           : linear-gradient(top,#ededed 0%,#fbfbfb 100%); */
+  background-image                           : -o-linear-gradient(top,#e6e7e8 0%,#f2f2f2 100%);
+  background-image                           : linear-gradient(top,#e6e7e8 0%,#f2f2f2 100%);
+  height                                     : 100%;}
+body
+ {font                                       : 8px/12px Helvetica,Arial,sans-serif;
+  color                                      : #606060;}
+header
+ {height                                     : 14px;
+  line-height                                : 14px;
+  background-color                           : #cc0f16;
+  background-image                           : -o-linear-gradient(top,#b60f15 0%,#cc0f16 100%);
+  background-image                           : linear-gradient(top,#b60f15 0%,#cc0f16 100%);
+  color                                      : #fff;
+  overflow                                   : hidden;
+  border-bottom                              : 1px solid #830014;}
+header h1
+ {padding                                    : 0 10px;
+  background                                 : transparent url('../logo.png') top right no-repeat;}
+
+div,article
+ {padding                                    : 20px 10px 10px 10px;
+  overflow                                   : hidden;
+  -o-transform-origin                        : center center;
+  position 							: fixed;
+  left								: 0;
+  right								: 0;
+  top								: 0;
+  bottom								: 0;}
+img
+ {display                                    : block;
+  width                                      : 100%;}
+figure
+ {max-width                                  : 48%;
+  margin                                     : 0 10px 2px 0;
+  float                                      : left;
+  display                                    : none;}
+a
+ {color								: inherit;
+  text-decoration						: inherit;}
+
+h1
+ {font-size                                  : 1.3em;
+  text-transform                             : lowercase;}
+h2
+ {font-size                                  : 1.4em;
+  /* word-wrap                                  : break-word;
+  word-break                                 : break-all; */
+  margin-bottom                              : 0.55em;
+  color                                      : #000;
+  line-height                                : 1.2em;
+  font-weight                                : bold;}
+p
+ {margin-bottom                              : 1em;}
+
+#content article {
+    opacity: 0;
+    z-index: 0;
+  -o-transition-property                     : all;
+  -o-transition-duration                     : .8s;
+  -o-transition-timing-function              : cubic-bezier(0,.5,.5,1);
+}
+#content article.focused
+ {opacity                                    : 1;
+  z-index                                    : 1;}
+
+@media all and (min-width: 127px)
+{
+ body
+  {font-size                                 : 10px;
+   line-height                               : 14px;}
+ header
+  {height                                    : 20px;
+   line-height                               : 22px;}
+ div,article
+  {padding-top                               : 30px;}
+ header h1
+  {background-image                          : url('../logo2.png');}
+}
+
+@media all and (min-width: 254px)
+{
+ body
+  {font-size                                 : 12px;
+   line-height                               : 16px;}
+ figure
+  {display                                   : block;}
+}
+
+@media all and (min-width: 338px)
+{
+ body
+  {font-size                                 : 14px;
+   line-height                               : 18px;}
+ header
+  {height                                    : 28px;
+   line-height                               : 28px;}
+ div,article
+  {padding-top                               : 38px;}
+ header h1
+  {background-image                          : url('../logo3.png');}
+}
+
+@media all and (min-width: 422px)
+{ 
+ body
+  {font-size                                 : 18px;
+   line-height                               : 20px;}
+ header
+  {height                                    : 34px;
+   line-height                               : 36px;}
+ div,article
+  {padding-top                               : 44px;}
+ header h1
+  {background-image                          : url('../logo4.png');}
+}
+
+@media all and (min-width: 508px)
+{ 
+ body
+  {font-size                                 : 22px;
+   line-height                               : 24px;}
+ header
+  {height                                    : 40px;
+   line-height                               : 42px;}
+ div,article
+  {padding-top                               : 50px;}
+ header h1
+  {background-image                          : url('../logo5.png');}
+}
