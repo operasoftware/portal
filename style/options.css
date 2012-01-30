@@ -179,6 +179,9 @@ select,option,input,button
   width                                      : 100%;
   font-size                                  : 1em;
   box-sizing                                 : border-box;}
+#sources input[type=number] {
+  width                                      : 40px;
+  }
 td>label
  {display 									 : table;
   width										 : 100%;}
