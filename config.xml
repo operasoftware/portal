@@ -1,7 +1,7 @@
-<widget xmlns="http://www.w3.org/ns/widgets" id="extensions:opera-portal" viewmodes="minimized" version="1.0">
+<widget xmlns="http://www.w3.org/ns/widgets" id="extensions:opera-portal" viewmodes="minimized" version="1.02">
 	<name>News Portal</name>
-	<description>Your Opera News Portal -- on Speed (Dial)!</description>
-	<author href="http://dustinwilson.com">Dustin Wilson</author>
+    <description>Live updates from all your favorite websites.</description>
+	<author href="http://opera.com">Opera Software</author>
 	<icon src="opera_icon_clean.png"/>
 	<access origin="http://portal.opera.com"/>
 	<access origin="*"/>
