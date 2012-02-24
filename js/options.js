@@ -67,7 +67,7 @@
         for (var i = 0, source; source = allSources[i]; i++) {
             options += '<option value="' + source.box_title + '">' + source.box_title + '</option>';
         }
-        sourceHTML = '<td><select>'+options+'</select></td><td><label><span><input type="number" step="1" min="1" max="3"></span><span>posts</span></label></td><td><button class="minus"><span>-</span></button><button class="plus"><span>+</span></button></td>';
+        sourceHTML = '<td><select>'+options+'</select></td><td><label><span><input type="number" step="1" min="1" max="3"></span><span>' + _getString('posts') + '</span></label></td><td><button class="minus"><span>-</span></button><button class="plus"><span>+</span></button></td>';
         document.getElementsByName('secondsperpost')[0].value = widget.preferences['delay'];
         document.getElementsByTagName('form')[0].addEventListener('submit', save, false);
         for (var a = 0; a < sources.length; a++) {

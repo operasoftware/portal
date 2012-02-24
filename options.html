@@ -2,22 +2,22 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Opera Portal - Preferences</title>
+	<title>News Portal - Preferences</title>
     <script src=js/options.js></script>
     <link rel=stylesheet type=text/css href=style/options.css />
 </head>
 <body>
-<form name="Opera Portal prefrences">
+<form name="News Portal preferences">
 
  <fieldset>
   <table>
    <tr>
-    <td>Seconds Per Post</td>
-    <td><label><span><input type="number" name="secondsperpost" step="1" min="1"></span> <span>seconds</span></label></td>
+    <td class=l11n>Seconds Per Post</td>
+    <td><label><span><input type="number" name="secondsperpost" step="1" min="1"></span> <span class=l11n>seconds</span></label></td>
     <td><div>Specifies the amount of time each post displays before transitioning to the next one.</div></td>
    </tr>
    <tr>
-    <td>Sources</td>
+    <td class=l11n>Sources</td>
     <td>
      <table><tbody id="sources"></tbody></table>
     </td>
@@ -29,7 +29,16 @@
   </table>
  </fieldset>
 
+ <fieldset>
+ <div id=notice><b class=l11n>Note</b>: <span class=l11n>To change language or add more sources, please go to</span> <a href="http://portal.opera.com">Portal</a>.</div>
+ </fieldset>
+
  <fieldset class="buttons">
-  <button type="submit">Save</button>
+      <button type="submit" class=l11n>Save</button>
  </fieldset>
 </form>
+
+<script src="localestrings.js"></script>
+<script src="js/l11n.js"></script>
+</body>
+</html>

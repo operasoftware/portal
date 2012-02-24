@@ -50,7 +50,7 @@ form
 fieldset
  {margin-top                                 : 10px;
   text-shadow                                : transparent 0 0 0;}
-fieldset>table
+fieldset>table, #notice
  {width                                      : 100%;
   border                                     : 1px solid #ababab;
   border-radius                              : 8px;
@@ -218,3 +218,7 @@ button
   {width                                     : 100%;}
 }
 
+#notice {
+    width: 94%;
+    padding: 0.5em 3%;
+}
