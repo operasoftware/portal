@@ -8,6 +8,7 @@
 	<feature name="opera:speeddial" required="true">
 	 <param name="url" value="http://portal.opera.com"/>
 	</feature>
+    <feature name="opera:share-cookies" required="false"/>
 	<license></license>
 	<preference name="sources" value=''/>
 	<preference name="delay" value="15"/> 

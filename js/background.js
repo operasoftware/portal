@@ -61,6 +61,10 @@
             }
             return false;
         });
+
+        if(posts.length == 0) {
+            posts = data.slice(0,2);
+        }
            
         var div = document.createElement('div');
         for(var i=0, post; post = posts[i]; i++) {
