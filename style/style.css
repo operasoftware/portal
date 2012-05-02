@@ -29,7 +29,12 @@ header
   background-image                           : linear-gradient(top,#b60f15 0%,#cc0f16 100%);
   color                                      : #fff;
   overflow                                   : hidden;
-  border-bottom                              : 1px solid #830014;}
+  border-bottom                              : 1px solid #830014;
+  font-weight: bolder;
+  letter-spacing: -1px;
+  text-shadow: 1px 1px 1px black;
+  
+  }
 header h1
  {padding                                    : 0 10px;
   background                                 : transparent url('../logo.png') top right no-repeat;}
