@@ -1,4 +1,4 @@
-<widget xmlns="http://www.w3.org/ns/widgets" id="extensions:opera-portal" viewmodes="minimized" version="1.02">
+<widget xmlns="http://www.w3.org/ns/widgets" id="extensions:opera-portal" viewmodes="minimized" version="1.1">
 	<name>News Portal</name>
     <description>Live updates from all your favorite websites.</description>
     <description xml:lang="pt-br">Atualizações ao vivo dos seus sites favoritos.</description>
