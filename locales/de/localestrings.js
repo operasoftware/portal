@@ -6,5 +6,5 @@ _STRINGS = {
     "posts": "Nachrichten",
     "Save": "Speichern",
     "Note": "Achtung",
-    "To change language or add more sources, please go to": "Um die Ländersprache zu ändern oder mehr Nachrichtenquellen hinzulegen, bitte gehe zu"
+    "To change language or add more sources, please go to": "Um die Ländersprache zu ändern oder mehr Nachrichtenquellen hinzu zufügen, bitte gehe zu"
 }

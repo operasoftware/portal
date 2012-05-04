@@ -1,6 +1,6 @@
 _STRINGS = {
     "Loading": "Memuat",
-    "Seconds Per Post": "Detik tiap Postingan",
+    "Seconds Per Post": "Tampilkan postingan baru tiap",
     "seconds": "detik",
     "Sources": "Sumber",
     "posts": "postingan",
