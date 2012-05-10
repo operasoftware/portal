@@ -1,4 +1,4 @@
-<widget xmlns="http://www.w3.org/ns/widgets" id="extensions:opera-portal" defaultlocale="en" viewmodes="minimized" version="1.2">
+<widget xmlns="http://www.w3.org/ns/widgets" id="extensions:opera-portal" defaultlocale="en" viewmodes="minimized" version="1.21">
 	<name>News Portal</name>
     <description xml:lang="en">Live updates from all your favorite websites.</description>
     <description xml:lang="pt-br">Atualizações ao vivo dos seus sites favoritos.</description>
@@ -9,7 +9,7 @@
     <description xml:lang="uk">Оновлення з ваших улюблених веб-сайтів в реальному часі.</description>
     <description xml:lang="no">Live oppdateringer fra alle dine favorittnettsteder.</description>
 	<author href="http://opera.com">Opera Software</author>
-	<icon src="opera_icon_clean.png"/>
+	<icon src="newsportal_64.png"/>
 	<access origin="http://portal.opera.com"/>
 	<access origin="*"/>
 	<feature name="opera:speeddial" required="true">
