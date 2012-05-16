@@ -1,6 +1,7 @@
 (function() {
     var delayTimer = null;
     var data;
+    var buffer = {};
     var portalURL = "http://portal.opera.com/portal/tabs/?tab_name=Opera%20Portal";
     var cell = opera.contexts.speeddial;
         cell.url = "http://portal.opera.com/portal/tabs/?tab_name=Opera%20Portal";
@@ -30,8 +31,8 @@
             focused = focused.nextSibling;
         }
         else {
-            focused = focused.parentNode.firstChild;
-        }
+                focused = focused.parentNode.firstChild;
+            }
         focused.className = 'focused';
         var url = document.getElementsByClassName('focused')[0].dataset['url'];
         cell.title = focused.title;
@@ -41,6 +42,21 @@
     function setRefreshTimer() {
         clearInterval(delayTimer);
         delayTimer = setInterval(swap, parseInt(widget.preferences.delay) * 1000);
+    }
+
+    // Cache images to avoid image-caching bug in SDE-context
+    function imageBuffer(src) {
+        if(!src) {
+            return document.createElement('span');
+        }
+        if(!buffer[src]) {
+            var figure = document.createElement('figure');
+            var img = document.createElement('img');
+            img.src = src;
+            figure.appendChild(img);
+            buffer[src] = figure;
+        }
+        return buffer[src];
     }
 
     function refresh() {
@@ -68,8 +84,7 @@
            
         var div = document.createElement('div');
         for(var i=0, post; post = posts[i]; i++) {
-            var image = post.post_image ? 
-                '<figure><img src="' + post.post_image + '"></figure>' : '';
+            var image = imageBuffer(post.post_image);
 
             post.post_title = hyphenate(post.post_title);
                         
@@ -77,7 +92,7 @@
                 var article = document.createElement('article');
                 article.dataset.url = post.url;
                 article.title = post.box_title;
-                article.innerHTML = image;
+                article.appendChild(image);
                 var h2 = document.createElement('h2');
                 h2.innerHTML = post.post_title;
                 article.appendChild(h2);
@@ -90,7 +105,7 @@
                     " (FINAL)" : 
                     (" (" + post.datetime + ")");
                 var article = document.createElement('article');
-                article.innerHTML = image;
+                article.appendChild(image);
                 var h2 = document.createElement('h2');
                 h2.textContent = post.competition_name;
                 article.appendChild(h2);
