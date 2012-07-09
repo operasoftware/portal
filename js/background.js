@@ -2,9 +2,9 @@
     var delayTimer = null;
     var data;
     var buffer = {};
-    var portalURL = "http://portal.opera.com/portal/tabs/?tab_name=Opera%20Portal";
+    var portalURL = "http://portal.opera.com/portal/tabs/?utm_source=DesktopBrowser&utm_medium=Speeddial&utm_campaign=SDE&tab_name=Opera%20Portal";
     var cell = opera.contexts.speeddial;
-        cell.url = "http://portal.opera.com/portal/tabs/?tab_name=Opera%20Portal";
+        cell.url = "http://portal.opera.com/portal/tabs/?utm_source=DesktopBrowser&utm_medium=Speeddial&utm_campaign=SDE&tab_name=Opera%20Portal";
 
     function parseData(text) {
         var items = JSON.parse(text);
