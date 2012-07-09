@@ -6,13 +6,23 @@
     var cell = opera.contexts.speeddial;
         cell.url = "http://portal.opera.com/portal/tabs/?tab_name=Opera%20Portal";
 
+    function parseData(text) {
+        var items = JSON.parse(text);
+        var fragment = document.createElement('div');
+        return items.map(function(item) {
+            fragment.innerHTML = item.post_content;
+            item.post_content = fragment.innerText;
+            return item;
+        });
+    }
+
     function getSources() {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', widget.preferences.baseURI + "?boxes=100&per_box=3", true);
         xhr.onreadystatechange = function(event) {
             if(xhr.readyState === 4) {
                 if(xhr.status === 200) {
-                    data = JSON.parse(xhr.responseText);
+                    data = parseData(xhr.responseText);
                     refresh();
                 }
                 else if(!widget.preferences.sources) {
