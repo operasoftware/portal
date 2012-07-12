@@ -107,9 +107,9 @@ button.minus,button.plus
  {background-position                        : center center;
   background-repeat                          : no-repeat;}
 button.plus
- {background-image                           : url('../plus.png');}
+ {background-image                           : url('../img/plus.png');}
 button.minus
- {background-image                           : url('../minus.png');}
+ {background-image                           : url('../img/minus.png');}
 
 .help>div
  {-o-transition 							 : opacity 0.25s, top 0.25s, visibility 0.25s;

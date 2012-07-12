@@ -37,7 +37,7 @@ header
   }
 header h1
  {padding                                    : 0 10px;
-  background                                 : transparent url('../logo.png') top right no-repeat;}
+  background                                 : transparent url('../img/logo.png') top right no-repeat;}
 
 div,article
  {padding                                    : 20px 10px 10px 10px;
@@ -96,7 +96,7 @@ p
  div,article
   {padding-top                               : 30px;}
  header h1
-  {background-image                          : url('../logo2.png');}
+  {background-image                          : url('../img/logo2.png');}
 }
 
 @media all and (min-width: 254px)
@@ -119,7 +119,7 @@ p
  div,article
   {padding-top                               : 38px;}
  header h1
-  {background-image                          : url('../logo3.png');}
+  {background-image                          : url('../img/logo3.png');}
 }
 
 @media all and (min-width: 422px)
@@ -133,7 +133,7 @@ p
  div,article
   {padding-top                               : 44px;}
  header h1
-  {background-image                          : url('../logo4.png');}
+  {background-image                          : url('../img/logo4.png');}
 }
 
 @media all and (min-width: 508px)
@@ -147,5 +147,5 @@ p
  div,article
   {padding-top                               : 50px;}
  header h1
-  {background-image                          : url('../logo5.png');}
+  {background-image                          : url('../img/logo5.png');}
 }

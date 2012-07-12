@@ -9,7 +9,7 @@
     <description xml:lang="uk">Оновлення з ваших улюблених веб-сайтів в реальному часі.</description>
     <description xml:lang="no">Live oppdateringer fra alle dine favorittnettsteder.</description>
 	<author href="http://opera.com">Opera Software</author>
-	<icon src="newsportal_64.png"/>
+    <icon src="img/newsportal_64.png"/>
 	<access origin="http://portal.opera.com"/>
 	<access origin="*"/>
 	<feature name="opera:speeddial" required="true">
