@@ -5,32 +5,49 @@
     var portalURL = "http://portal.opera.com/portal/tabs/?utm_source=DesktopBrowser&utm_medium=Speeddial&utm_campaign=SDE&tab_name=Opera%20Portal";
     var cell = opera.contexts.speeddial;
         cell.url = "http://portal.opera.com/portal/tabs/?utm_source=DesktopBrowser&utm_medium=Speeddial&utm_campaign=SDE&tab_name=Opera%20Portal";
+    var prefs = widget.preferences;
 
-    function parseData(text) {
-        var items = JSON.parse(text);
-        var fragment = document.createElement('div');
-        return items.map(function(item) {
-            fragment.innerHTML = item.post_content;
-            item.post_content = fragment.innerText;
-            return item;
+    function error() {
+        opera.postError('ERROR: Something goes here');
+    }
+
+    function parseSources(callback, request) {
+        var items = JSON.parse(request.responseText);
+        callback(items);
+    }
+
+    function parseFeed(callback, request) {
+        callback(JSON.parse(request.responseText));
+    }
+
+    function getFeed(feed, callback) {
+        _XHR(prefs.baseURI + "boxes/" + feed.id + "?per_box=" + feed.count, parseFeed.bind(undefined, callback));
+    }
+
+    function getSources(callback) {
+        _XHR(prefs.baseURI + "all_boxes", function(request) {
+            var data = JSON.parse(request.responseText);
+            var box = data.boxes[0];
+            prefs.sources = JSON.stringify([{id: box.id, count: 3}]);
+            getFeeds();
         });
     }
 
-    function getSources() {
+    function _XHR(url, callback) {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', widget.preferences.baseURI + "?boxes=100&per_box=3", true);
+        xhr.open('GET', url, true);
         xhr.onreadystatechange = function(event) {
             if(xhr.readyState === 4) {
                 if(xhr.status === 200) {
-                    data = parseData(xhr.responseText);
-                    refresh();
+                    callback(xhr);
                 }
-                else if(!widget.preferences.sources) {
-                    document.getElementById('content').innerHTML = 
-                        "<h2>Error. Will reattempt in 5 minutes.</h2>";
+                else {
+                    error();
                 }
             }
         }
+        xhr.timeout = 10000;
+        xhr.ontimeout = error;
         xhr.send();
     }
 
@@ -41,17 +58,17 @@
             focused = focused.nextSibling;
         }
         else {
-                focused = focused.parentNode.firstChild;
-            }
+            focused = focused.parentNode.firstChild;
+        }
         focused.className = 'focused';
         var url = document.getElementsByClassName('focused')[0].dataset['url'];
         cell.title = focused.title;
-        cell.url = portalURL + "&ext_url=" + encodeURIComponent(url); 
+        cell.url = portalURL + "&ext_url=" + encodeURIComponent(url);
     }
 
     function setRefreshTimer() {
         clearInterval(delayTimer);
-        delayTimer = setInterval(swap, parseInt(widget.preferences.delay) * 1000);
+        delayTimer = setInterval(swap, parseInt(prefs.delay) * 1000);
     }
 
     // Cache images to avoid image-caching bug in SDE-context
@@ -69,28 +86,27 @@
         return buffer[src];
     }
 
-    function refresh() {
-        var sources = {};
-        if(!widget.preferences.sources) {
-            sources[data[0].box_title] = 3;
+    function getFeeds() {
+        if(!prefs.sources) {
+            return getSources(getFeeds);
         }
-        else {
-            JSON.parse(widget.preferences.sources).forEach(function(source) {
-                sources[source.name] = source.count;
+        var sources = JSON.parse(prefs.sources);
+
+        var data = [];
+        sources.forEach(function(source) {
+            getFeed(source, function(result) {
+                data.push(result);
+                if(data.length == sources.length) {
+                    refreshFeeds(data);
+                }
             });
-        }
-
-        var posts = data.filter(function(post) {
-            if(sources[post.box_title]) {
-                sources[post.box_title]--;
-                return true;
-            }
-            return false;
         });
+    }
 
-        if(posts.length == 0) {
-            posts = data.slice(0,2);
-        }
+    function refreshFeeds(feedData) {
+        var posts = feedData.reduce(function(arr, feed) {
+            return arr.concat(feed);
+        }, []);
            
         var div = document.createElement('div');
         for(var i=0, post; post = posts[i]; i++) {
@@ -98,35 +114,18 @@
 
             post.post_title = hyphenate(post.post_title);
                         
-            if(post.box_type == "feed") {
-                var article = document.createElement('article');
-                article.dataset.url = post.url;
-                article.title = post.box_title;
-                article.appendChild(image);
-                var h2 = document.createElement('h2');
-                h2.innerHTML = post.post_title;
-                article.appendChild(h2);
-                var p = document.createElement('p');
-                p.textContent = post.post_content;
-                article.appendChild(p);
-                div.appendChild(article);
-            } else if(post.box_type == "sports") {
-                var status = (post.status == "Played") ? 
-                    " (FINAL)" : 
-                    (" (" + post.datetime + ")");
-                var article = document.createElement('article');
-                article.appendChild(image);
-                var h2 = document.createElement('h2');
-                h2.textContent = post.competition_name;
-                article.appendChild(h2);
-                var p = document.createElement('p');
-                p.textContent = post.team_B_name + ' @ ' + post.team_A_name;
-                var p2 = document.createElement('p');
-                p2.textContent = post.fs_B + '-' + post.fs_A + status;
-                article.appendChild(p);
-                article.appendChild(p2);
-                div.appendChild(article);
-            }
+            var article = document.createElement('article');
+            article.dataset.url = post.url;
+            article.title = post.box_title;
+            article.appendChild(image);
+            var h2 = document.createElement('h2');
+            h2.innerHTML = post.post_title;
+            article.appendChild(h2);
+            var p = document.createElement('p');
+            p.innerHTML = post.post_content;
+            p.innerHTML = p.textContent;
+            article.appendChild(p);
+            div.appendChild(article);
         }
         
         var content = document.getElementById('content');
@@ -138,10 +137,8 @@
     }
 
     function reconfigure(ev) {
-        if (ev.storageArea != widget.preferences) return;
-        switch(ev.key) {
-            case 'delay':  setRefreshTimer(); break;
-            case 'sources': getSources(); break;
+        if(ev.key == 'sources') {
+            getFeeds();
         }
     }
 
@@ -156,7 +153,7 @@
     function init() {
         setRefreshTimer();
         window.addEventListener('storage', reconfigure, false);
-        setInterval(getSources, 300000);
+        setInterval(getFeeds, 300000);
         getSources();
     }
 

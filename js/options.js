@@ -1,78 +1,114 @@
 (function() {
-    var options = "";
 
-    function getSources() {
-        var agent = new XMLHttpRequest();
-        agent.open('GET', widget.preferences['baseURI']+"?boxes=100&per_box=1", false, '', '');
-        agent.send()
-        if (agent.status<400) {
-            return JSON.parse(agent.responseText);
-        }
-        return [];
-    }
-    function addItem(refNode, data) {
-        if (!data) data = {'id':"", 'count':3};
-        var row = document.getElementById('sources').insertBefore(document.createElement('tr'), refNode);
-        row.innerHTML = sourceHTML;
-        var options = row.getElementsByTagName('option');
-        for (var b = 0; b < options.length; b++) {
-            if (options[b].value==data['name']) {
-                options[b].selected = true;
-                break;
+    function fetchSources(callback) {
+        var req = new XMLHttpRequest();
+        req.open('GET', widget.preferences['baseURI']+"all_boxes", true);
+        req.onreadystatechange = function() {
+            if(req.readyState == 4) {
+                if(req.status == 200) {
+                    callback(req.responseText);
+                }
             }
         }
-        row.getElementsByTagName('input')[0].value = data['count'];
-        row.getElementsByTagName('button')[0].addEventListener('click', less, false);
-        row.getElementsByTagName('button')[1].addEventListener('click', more, false);
+        req.send();
     }
-    function save(ev) {
-        var rows = document.getElementById('sources').getElementsByTagName('tr');
-        var data = []
-        for (var a = 0; a < rows.length; a++) {
-            data.push({'name':rows[a].getElementsByTagName('select')[0].value, 'count':rows[a].getElementsByTagName('input')[0].value});
-        }
-        data = JSON.stringify(data);
-        if (widget.preferences['source'] != data) widget.preferences.setItem('sources', data);
-        var delay = document.getElementsByName('secondsperpost')[0].value;
-        if (widget.preferences['delay'] != delay) widget.preferences.setItem('delay', delay);
-        ev.preventDefault();
+
+    function saveSources() {
+        var sourceElements = document.querySelectorAll('#source-list li');
+        var sourceData = Array.prototype.map.call(sourceElements, 
+            function(li) {
+                var select = li.querySelector('select');
+                return { 
+                    id: select.options[select.selectedIndex].value,
+                    count: li.querySelector('input').value
+                };
+            }
+        );
+        widget.preferences.sources = JSON.stringify(sourceData);
         window.close();
     }
-    function less(ev) {
-        var row = ev.target.parentNode.parentNode
-        table = row.parentNode;
-        table.removeChild(row);
-        if (!table.firstChild) addItem();
-        ev.preventDefault();
+
+    function getSelectedSources() {
+        var savedSources = widget.preferences.sources;
+        if(savedSources) {
+            return JSON.parse(savedSources);
+        }
+        else {
+            return [];
+        }
     }
-    function more(ev) {
-        addItem(ev.target.parentNode.parentNode.nextSibling)
-        ev.preventDefault();
+
+    function createListElement(select, source) {
+        var li = document.createElement('li');
+        var countInput = document.createElement('input');
+            countInput.type = 'number';
+            countInput.step = 1;
+            countInput.min = 1;
+            countInput.max = 5;
+            countInput.value = source ? source.count : 3;
+        var span = document.createElement('span');
+            span.className = 'l11n';
+            span.textContent = _getString('posts');
+        var button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = '✖';
+            button.className = 'remove-source';
+            button.addEventListener('click', function() {
+                li.parentElement.removeChild(li);
+            }, false);
+
+        if(source) {
+            Array.prototype.forEach.call(select.options, function(option, index) {
+                if(option.value == source.id) {
+                    select.selectedIndex = index;
+                }
+            });
+        }
+
+        li.appendChild(select);
+        li.appendChild(countInput);
+        li.appendChild(span);
+        li.appendChild(button);
+
+        return li;
+    }
+
+    function addSource(select) {
+        document.getElementById('source-list')
+            .appendChild(createListElement(select.cloneNode(true)));
+    }
+
+    function initSourceList(selectedSources, sourceList) {
+        var sources = JSON.parse(sourceList).boxes;
+        var select = document.createElement('select');
+        sources.forEach(function(source) {
+            var option = document.createElement('option');
+            option.value = source.id;
+            option.textContent = source.name;
+            select.appendChild(option);
+        });
+
+        var ul = document.getElementById('source-list');
+            ul.innerHTML = '';
+        if(selectedSources.length > 0) {
+            selectedSources.forEach(function(source) {
+                ul.appendChild(createListElement(select.cloneNode(true), source));
+            });
+        }
+        else {
+            ul.appendChild(createListElement(select.cloneNode(true)));
+        }
+
+        document.getElementById('new-source').addEventListener('click', 
+            addSource.bind(undefined, select), false
+        );
     }
 
     function init() {
-        var allSources = getSources().filter(function(source) {
-            return source.box_type == 'feed';
-        });
-
-        var sources;
-        if (widget.preferences.sources) {
-            sources = JSON.parse(widget.preferences.sources);
-        }
-        else {
-            sources = [{name: allSources[0].box_title, count: 3}];
-            widget.preferences.sources = JSON.stringify(sources);
-        }
-
-        for (var i = 0, source; source = allSources[i]; i++) {
-            options += '<option value="' + source.box_title + '">' + source.box_title + '</option>';
-        }
-        sourceHTML = '<td><select>'+options+'</select></td><td><label><span><input type="number" step="1" min="1" max="3"></span><span>' + _getString('posts') + '</span></label></td><td><button class="minus"><span>-</span></button><button class="plus"><span>+</span></button></td>';
-        document.getElementsByName('secondsperpost')[0].value = widget.preferences['delay'];
-        document.getElementsByTagName('form')[0].addEventListener('submit', save, false);
-        for (var a = 0; a < sources.length; a++) {
-            addItem(null, sources[a]);
-        }
+        var selectedSources = getSelectedSources();
+        fetchSources(initSourceList.bind(undefined, selectedSources));
+        document.getElementById('save-button')
+            .addEventListener('click', saveSources, false);
     }
     document.addEventListener('DOMContentLoaded', init, false);
 }())
