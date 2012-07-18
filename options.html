@@ -2,43 +2,26 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>News Portal - Preferences</title>
+	<title>News Portal</title>
     <script src=js/options.js></script>
     <link rel=stylesheet type=text/css href=style/options.css />
 </head>
 <body>
-<form name="News Portal preferences">
+    <form>
+        <h3 class=l11n>Sources</h3>
+        <div id=sources>
+            <ul id=source-list>
+            </ul>
+            <button type=button id=new-source class=l11n>+</button></div>
+        </div>
+    </form>
 
- <fieldset>
-  <table>
-   <tr>
-    <td class=l11n>Seconds Per Post</td>
-    <td><label><span><input type="number" name="secondsperpost" step="1" min="1"></span> <span class=l11n>seconds</span></label></td>
-    <td><div>Specifies the amount of time each post displays before transitioning to the next one.</div></td>
-   </tr>
-   <tr>
-    <td class=l11n>Sources</td>
-    <td>
-     <table><tbody id="sources"></tbody></table>
-    </td>
-    <td><div>
-     <p>The first option allows for selecting which source to use, and the second option allows for selecting the maximum amount of posts from each source.</p>
-     <p>
-    </div></td>
-   </tr>
-  </table>
- </fieldset>
+    <div id=notice>
+        <div class=l11n id=note>Note</div>: <div id=notice-text><span class=l11n>To change language or add more sources, please go to</span> <a href="http://portal.opera.com">Opera Portal</a>.</div>
+    </div>
+    <button id=save-button type="button" class=l11n>Save</button>
 
- <fieldset>
- <div id=notice><b class=l11n>Note</b>: <span class=l11n>To change language or add more sources, please go to</span> <a href="http://portal.opera.com">Opera Portal</a>.</div>
- </fieldset>
-
- <fieldset class="buttons">
-      <button type="submit" class=l11n>Save</button>
- </fieldset>
-</form>
-
-<script src="localestrings.js"></script>
-<script src="js/l11n.js"></script>
+    <script src="localestrings.js"></script>
+    <script src="js/l11n.js"></script>
 </body>
 </html>
