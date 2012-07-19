@@ -13,10 +13,7 @@ html,body
   overflow                                   : hidden;}
 html
  {background-color                           : #fff;
-  /* background-image                           : -o-linear-gradient(top,#ededed 0%,#fbfbfb 100%);
-  background-image                           : linear-gradient(top,#ededed 0%,#fbfbfb 100%); */
-  background-image                           : -o-linear-gradient(top,#e6e7e8 0%,#f2f2f2 100%);
-  background-image                           : linear-gradient(top,#e6e7e8 0%,#f2f2f2 100%);
+  background-image                           : -o-linear-gradient(top,rgba(230, 231, 232, 0), rgba(242,242,242,1.0));
   height                                     : 100%;}
 body
  {font                                       : 8px/12px Helvetica,Arial,sans-serif;
@@ -25,8 +22,7 @@ header
  {height                                     : 14px;
   line-height                                : 14px;
   background-color                           : #cc0f16;
-  background-image                           : -o-linear-gradient(top,#b60f15 0%,#cc0f16 100%);
-  background-image                           : linear-gradient(top,#b60f15 0%,#cc0f16 100%);
+  background-image                           : -o-linear-gradient(top,rgba(182,15,21,0), rgba(204,15,22, 1.0));
   color                                      : #fff;
   overflow                                   : hidden;
   border-bottom                              : 1px solid #830014;
