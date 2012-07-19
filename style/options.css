@@ -31,6 +31,9 @@ li {
     border-bottom: 1px solid rgb(234,234,234);
     list-style-type: none;
 }
+li:first-child:last-child button {
+    display: none;
+}
 
 #save-button {
     cursor: pointer;
