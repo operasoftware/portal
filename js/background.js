@@ -25,12 +25,7 @@
     }
 
     function getSources(callback) {
-        _XHR(prefs.baseURI + "all_boxes", function(request) {
-            var data = JSON.parse(request.responseText);
-            var box = data.boxes[0];
-            prefs.sources = JSON.stringify([{id: box.id, count: 3}]);
-            getFeeds();
-        });
+        _XHR(prefs.baseURI + "all_boxes", callback);
     }
 
     function _XHR(url, callback) {
@@ -86,9 +81,16 @@
         return buffer[src];
     }
 
+    function setFirstSource(request) {
+        var data = JSON.parse(request.responseText);
+        var box = data.boxes[0];
+        prefs.sources = JSON.stringify([{id: box.id, count: 3}]);
+        getFeeds();
+    }
+
     function getFeeds() {
         if(!prefs.sources) {
-            return getSources(getFeeds);
+            return getSources(setFirstSource);
         }
         var sources = JSON.parse(prefs.sources);
 
@@ -150,11 +152,45 @@
         return arr.join(' ');
     }
 
+    function transformSources(request) {
+        var oldSources = JSON.parse(prefs.sources);
+        var newSources = JSON.parse(request.responseText).boxes;
+        var sources = oldSources.map(function(source) {
+            for(var i=0, newSource; newSource = newSources[i]; i++) {
+                if(newSource.name == source.name) {
+                    return {id: newSource.id, count: source.count};
+                }
+            }
+            return null;
+        }).filter(function(source) {
+            return source !== null;
+        });
+        var finalSources = sources.length == 0 ? 
+            {id: newSources[0].id, count: 3} : sources;
+        prefs.sources = JSON.stringify(finalSources);
+        init();
+    }
+
+    function checkSourceFormat() {
+        if(prefs.sources) {
+            var sources = JSON.parse(prefs.sources);
+            if(sources[0].name) {
+                getSources(transformSources);
+                return true;
+            }
+        }
+        return false;
+    }
+
     function init() {
+        // Check if settings are from the old API, and transform if necessary.
+        if(checkSourceFormat()) {
+            return;
+        };
         setRefreshTimer();
         window.addEventListener('storage', reconfigure, false);
         setInterval(getFeeds, 300000);
-        getSources();
+        getFeeds();
     }
 
     document.addEventListener('DOMContentLoaded', init, false);
